@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración del Viewport para asegurar la responsividad en todos los dispositivos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mejor Centro de Fitness del Maresme</title>
+    <!-- Carga de Tailwind CSS para el estilo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Lucide Icons para los iconos de los recuadros -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Configuración de Tailwind para usar la fuente Inter y un esquema de color personalizado -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Fondo suave */
+        }
+        /* Color azul BDiR personalizado */
+        .text-main-blue { color: #009FE3; }
+        .bg-main-blue { background-color: #009FE3; }
+        .hover-bg-main-dark:hover { background-color: #007bb0; }
+        .ring-main-blue:focus { --tw-ring-color: #009FE3; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-8">
+
+    <!-- Contenedor Principal Centrado y con Sombra -->
+    <main class="w-full max-w-6xl mx-auto bg-white shadow-xl rounded-3xl p-6 sm:p-12 border border-gray-100">
+
+        <!-- Encabezado Principal -->
+        <header class="text-center mb-10 sm:mb-16">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+                EL MEJOR CENTRO DE FITNESS DEL MARESME
+            </h1>
+            <p class="mt-4 text-lg text-main-blue font-medium">
+                Tu centro de referencia para la salud integral y el deporte.
+            </p>
+        </header>
+
+        <!-- Contenedor de los Recuadros de Enlace (Grid Responsive) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+
+            <!-- Recuadro 1: Entrenamiento Personal -->
+            <!-- Enlace a la Landing de Entrenamiento Personal -->
+            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresmeEP/" 
+               class="flex flex-col items-center justify-center p-6 bg-main-blue hover-bg-main-dark text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 ring-main-blue">
+                <div class="mb-4">
+                    <!-- Icono de Lucide: Persona con engranaje (Entrenamiento/Coaching) -->
+                    <i data-lucide="user-cog" class="w-12 h-12"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                    Entrenamiento Personal
+                </h2>
+                <p class="mt-2 text-sm text-blue-100 text-center">
+                    Programas a medida para alcanzar tus metas.
+                </p>
+            </a>
+
+            <!-- Recuadro 2: Nutrición -->
+            <!-- Enlace a la Landing de Nutrición -->
+            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/" 
+               class="flex flex-col items-center justify-center p-6 bg-green-500 hover:bg-green-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-green-300">
+                <div class="mb-4">
+                    <!-- Icono de Lucide: Manzana (Nutrición) -->
+                    <i data-lucide="apple" class="w-12 h-12"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                    Nutrición
+                </h2>
+                <p class="mt-2 text-sm text-green-100 text-center">
+                    Planes dietéticos personalizados y asesoramiento.
+                </p>
+            </a>
+
+            <!-- Recuadro 3: Fisioterapia -->
+            <!-- Enlace a la Landing de Fisioterapia -->
+            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/" 
+               class="flex flex-col items-center justify-center p-6 bg-orange-500 hover:bg-orange-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-orange-300">
+                <div class="mb-4">
+                    <!-- Icono de Lucide: Estetoscopio (Fisioterapia/Salud) -->
+                    <i data-lucide="stethoscope" class="w-12 h-12"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                    Fisioterapia
+                </h2>
+                <p class="mt-2 text-sm text-orange-100 text-center">
+                    Recuperación de lesiones y prevención de problemas.
+                </p>
+            </a>
+
+            <!-- Recuadro 4: Promos Cuotas -->
+            <!-- Enlace a la Landing de Promos Cuotas (la que estábamos viendo antes) -->
+            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/" 
+               class="flex flex-col items-center justify-center p-6 bg-red-500 hover:bg-red-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-red-300">
+                <div class="mb-4">
+                    <!-- Icono de Lucide: Etiqueta de Precio (Promociones/Ofertas) -->
+                    <i data-lucide="tag" class="w-12 h-12"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                    Promos Cuotas
+                </h2>
+                <p class="mt-2 text-sm text-red-100 text-center">
+                    Descubre nuestras ofertas y tarifas especiales.
+                </p>
+            </a>
+
+        </section>
+
+        <!-- Pie de página (Opcional, para contexto) -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>Tu centro de referencia en el Maresme para la salud integral y el deporte.</p>
+        </footer>
+
+    </main>
+    
+    <!-- Script para inicializar los iconos de Lucide -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
