@@ -3,7 +3,7 @@
 <head>
     <!-- Configuración del Viewport para asegurar la responsividad en todos los dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Mejor Centro de Fitness del Maresme</title>
+    <title id="pageTitle">El Mejor Centro de Fitness del Maresme</title>
     <!-- Carga de Tailwind CSS para el estilo -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Carga de Lucide Icons para los iconos de los recuadros -->
@@ -28,12 +28,32 @@
     <!-- Contenedor Principal Centrado y con Sombra -->
     <main class="w-full max-w-6xl mx-auto bg-white shadow-xl rounded-3xl p-6 sm:p-12 border border-gray-100">
 
+        <!-- Barra Superior: Logo y Selector de Idioma -->
+        <div class="flex justify-between items-center mb-6 sm:mb-10">
+            <!-- Logo BDiR Maresme (Estilo ajustado: BDiR menos negrita, Maresme en negro sin negrita) -->
+            <a href="#" class="text-2xl sm:text-3xl font-bold text-main-blue tracking-tight hover:text-blue-700 transition duration-200">
+                BDiR <span class="text-gray-800 font-normal">Maresme</span>
+            </a>
+
+            <!-- Selector de Idioma -->
+            <div class="flex space-x-2 text-sm font-semibold">
+                <button id="lang-es" onclick="setLanguage('es')" 
+                        class="px-3 py-1 rounded-full bg-main-blue text-white shadow-md transition duration-200 hover:bg-main-dark">
+                    ES
+                </button>
+                <button id="lang-ca" onclick="setLanguage('ca')" 
+                        class="px-3 py-1 rounded-full bg-gray-200 text-gray-700 shadow-md transition duration-200 hover:bg-gray-300">
+                    CA
+                </button>
+            </div>
+        </div>
+
         <!-- Encabezado Principal -->
         <header class="text-center mb-10 sm:mb-16">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+            <h1 id="mainTitle" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
                 EL MEJOR CENTRO DE FITNESS DEL MARESME
             </h1>
-            <p class="mt-4 text-lg text-main-blue font-medium">
+            <p id="subTitle" class="mt-4 text-lg text-main-blue font-medium">
                 Tu centro de referencia para la salud integral y el deporte.
             </p>
         </header>
@@ -42,65 +62,57 @@
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
 
             <!-- Recuadro 1: Entrenamiento Personal -->
-            <!-- Enlace a la Landing de Entrenamiento Personal -->
             <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresmeEP/" 
                class="flex flex-col items-center justify-center p-6 bg-main-blue hover-bg-main-dark text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 ring-main-blue">
                 <div class="mb-4">
-                    <!-- Icono de Lucide: Persona con engranaje (Entrenamiento/Coaching) -->
                     <i data-lucide="user-cog" class="w-12 h-12"></i>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                <h2 id="card1Title" class="text-xl sm:text-2xl font-bold text-center">
                     Entrenamiento Personal
                 </h2>
-                <p class="mt-2 text-sm text-blue-100 text-center">
+                <p id="card1Desc" class="mt-2 text-sm text-blue-100 text-center">
                     Programas a medida para alcanzar tus metas.
                 </p>
             </a>
 
             <!-- Recuadro 2: Nutrición -->
-            <!-- Enlace a la Landing de Nutrición -->
             <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/" 
                class="flex flex-col items-center justify-center p-6 bg-green-500 hover:bg-green-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-green-300">
                 <div class="mb-4">
-                    <!-- Icono de Lucide: Manzana (Nutrición) -->
                     <i data-lucide="apple" class="w-12 h-12"></i>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                <h2 id="card2Title" class="text-xl sm:text-2xl font-bold text-center">
                     Nutrición
                 </h2>
-                <p class="mt-2 text-sm text-green-100 text-center">
+                <p id="card2Desc" class="mt-2 text-sm text-green-100 text-center">
                     Planes dietéticos personalizados y asesoramiento.
                 </p>
             </a>
 
             <!-- Recuadro 3: Fisioterapia -->
-            <!-- Enlace a la Landing de Fisioterapia -->
             <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/" 
                class="flex flex-col items-center justify-center p-6 bg-orange-500 hover:bg-orange-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-orange-300">
                 <div class="mb-4">
-                    <!-- Icono de Lucide: Estetoscopio (Fisioterapia/Salud) -->
                     <i data-lucide="stethoscope" class="w-12 h-12"></i>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                <h2 id="card3Title" class="text-xl sm:text-2xl font-bold text-center">
                     Fisioterapia
                 </h2>
-                <p class="mt-2 text-sm text-orange-100 text-center">
+                <p id="card3Desc" class="mt-2 text-sm text-orange-100 text-center">
                     Recuperación de lesiones y prevención de problemas.
                 </p>
             </a>
 
             <!-- Recuadro 4: Promos Cuotas -->
-            <!-- Enlace a la Landing de Promos Cuotas (la que estábamos viendo antes) -->
             <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/" 
                class="flex flex-col items-center justify-center p-6 bg-red-500 hover:bg-red-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-red-300">
                 <div class="mb-4">
-                    <!-- Icono de Lucide: Etiqueta de Precio (Promociones/Ofertas) -->
                     <i data-lucide="tag" class="w-12 h-12"></i>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-bold text-center">
+                <h2 id="card4Title" class="text-xl sm:text-2xl font-bold text-center">
                     Promos Cuotas
                 </h2>
-                <p class="mt-2 text-sm text-red-100 text-center">
+                <p id="card4Desc" class="mt-2 text-sm text-red-100 text-center">
                     Descubre nuestras ofertas y tarifas especiales.
                 </p>
             </a>
@@ -109,14 +121,90 @@
 
         <!-- Pie de página (Opcional, para contexto) -->
         <footer class="mt-12 text-center text-gray-500 text-sm">
-            <p>Tu centro de referencia en el Maresme para la salud integral y el deporte.</p>
+            <p id="footerText">Tu centro de referencia en el Maresme para la salud integral y el deporte.</p>
         </footer>
 
     </main>
     
-    <!-- Script para inicializar los iconos de Lucide -->
     <script>
+        // Inicializa los iconos de Lucide
         lucide.createIcons();
+
+        // ----------------------------------------------------
+        // LÓGICA DEL IDIOMA
+        // ----------------------------------------------------
+        const content = {
+            'es': {
+                pageTitle: 'El Mejor Centro de Fitness del Maresme',
+                mainTitle: 'EL MEJOR CENTRO DE FITNESS DEL MARESME',
+                subTitle: 'Tu centro de referencia para la salud integral y el deporte.',
+                card1Title: 'Entrenamiento Personal',
+                card1Desc: 'Programas a medida para alcanzar tus metas.',
+                card2Title: 'Nutrición',
+                card2Desc: 'Planes dietéticos personalizados y asesoramiento.',
+                card3Title: 'Fisioterapia',
+                card3Desc: 'Recuperación de lesiones y prevención de problemas.',
+                card4Title: 'Promos Cuotas',
+                card4Desc: 'Descubre nuestras ofertas y tarifas especiales.',
+                footerText: 'Tu centro de referencia en el Maresme para la salud integral y el deporte.'
+            },
+            'ca': {
+                pageTitle: 'El Millor Centre de Fitness del Maresme',
+                mainTitle: 'EL MILLOR CENTRE DE FITNESS DEL MARESME',
+                subTitle: "El teu centre de referència per a la salut integral i l'esport.",
+                card1Title: 'Entrenament Personal',
+                card1Desc: 'Programes a mida per assolir els teus objectius.',
+                card2Title: 'Nutrició',
+                card2Desc: 'Plans dietètics personalitzats i assessorament.',
+                card3Title: 'Fisioteràpia',
+                card3Desc: 'Recuperació de lesions i prevenció de problemes.',
+                card4Title: 'Promos Quotes',
+                card4Desc: 'Descobreix les nostres ofertes i tarifes especials.',
+                footerText: "El teu centre de referència al Maresme per a la salut integral i l'esport."
+            }
+        };
+
+        function updateButtonStyles(lang) {
+            const esButton = document.getElementById('lang-es');
+            const caButton = document.getElementById('lang-ca');
+            
+            if (lang === 'es') {
+                esButton.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                esButton.classList.add('bg-main-blue', 'text-white', 'hover-bg-main-dark');
+                caButton.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                caButton.classList.remove('bg-main-blue', 'text-white', 'hover-bg-main-dark');
+            } else if (lang === 'ca') {
+                caButton.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                caButton.classList.add('bg-main-blue', 'text-white', 'hover-bg-main-dark');
+                esButton.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                esButton.classList.remove('bg-main-blue', 'text-white', 'hover-bg-main-dark');
+            }
+        }
+
+        function setLanguage(lang) {
+            const data = content[lang];
+            
+            document.getElementById('pageTitle').textContent = data.pageTitle;
+            document.getElementById('mainTitle').textContent = data.mainTitle;
+            document.getElementById('subTitle').textContent = data.subTitle;
+            document.getElementById('card1Title').textContent = data.card1Title;
+            document.getElementById('card1Desc').textContent = data.card1Desc;
+            document.getElementById('card2Title').textContent = data.card2Title;
+            document.getElementById('card2Desc').textContent = data.card2Desc;
+            document.getElementById('card3Title').textContent = data.card3Title;
+            document.getElementById('card3Desc').textContent = data.card3Desc;
+            document.getElementById('card4Title').textContent = data.card4Title;
+            document.getElementById('card4Desc').textContent = data.card4Desc;
+            document.getElementById('footerText').textContent = data.footerText;
+            
+            updateButtonStyles(lang);
+            // Guarda el idioma seleccionado para futuras cargas
+            localStorage.setItem('selectedLang', lang);
+        }
+
+        // Carga el idioma al iniciar (por defecto, Castellano)
+        const initialLang = localStorage.getItem('selectedLang') || 'es';
+        setLanguage(initialLang);
     </script>
 </body>
 </html>
