@@ -1,210 +1,554 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Configuración del Viewport para asegurar la responsividad en todos los dispositivos -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">El Mejor Centro de Fitness del Maresme</title>
-    <!-- Carga de Tailwind CSS para el estilo -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carga de Lucide Icons para los iconos de los recuadros -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>BDiR Maresme - El Mejor Centro de Fitness</title>
     
-    <!-- Configuración de Tailwind para usar la fuente Inter y un esquema de color personalizado -->
+    <!-- 1. IMPORTAR TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. CONFIGURACIÓN DE FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- 3. IMPORTAR ICONOS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración de estilos personalizados -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc; /* Fondo suave */
-        }
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, button, .font-title { font-family: 'Montserrat', sans-serif; }
+        
         /* Color azul BDiR personalizado */
-        .text-main-blue { color: #009FE3; }
-        .bg-main-blue { background-color: #009FE3; }
-        .hover-bg-main-dark:hover { background-color: #007bb0; }
-        .ring-main-blue:focus { --tw-ring-color: #009FE3; }
+        .text-bdir-blue { color: #009FE3; }
+        .bg-bdir-blue { background-color: #009FE3; }
+        .hover-bg-bdir-dark:hover { background-color: #007bb0; }
+        
+        /* Estilos para el selector de idioma */
+        .lang-btn { cursor: pointer; transition: opacity 0.2s; }
+        .lang-btn.active { font-weight: bold; text-decoration: underline; color: #009FE3; }
+        .lang-btn:hover { opacity: 0.8; }
+        
+        /* Estilos para el modal */
+        .modal-overlay {
+            z-index: 50; /* Por encima de todo */
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Estilo para las tarjetas de servicio (Ahora son enlaces) */
+        .service-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .service-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 sm:p-8">
+<body class="min-h-screen bg-white font-sans text-gray-800 antialiased">
 
-    <!-- Contenedor Principal Centrado y con Sombra -->
-    <main class="w-full max-w-6xl mx-auto bg-white shadow-xl rounded-3xl p-6 sm:p-12 border border-gray-100">
-
-        <!-- Barra Superior: Logo y Selector de Idioma -->
-        <div class="flex justify-between items-center mb-6 sm:mb-10">
-            <!-- Logo BDiR Maresme (Estilo ajustado: BDiR menos negrita, Maresme en negro sin negrita) -->
-            <a href="#" class="text-2xl sm:text-3xl font-bold text-main-blue tracking-tight hover:text-blue-700 transition duration-200">
-                BDiR <span class="text-gray-800 font-normal">Maresme</span>
-            </a>
-
-            <!-- Selector de Idioma -->
-            <div class="flex space-x-2 text-sm font-semibold">
-                <button id="lang-es" onclick="setLanguage('es')" 
-                        class="px-3 py-1 rounded-full bg-main-blue text-white shadow-md transition duration-200 hover:bg-main-dark">
-                    ES
-                </button>
-                <button id="lang-ca" onclick="setLanguage('ca')" 
-                        class="px-3 py-1 rounded-full bg-gray-200 text-gray-700 shadow-md transition duration-200 hover:bg-gray-300">
-                    CA
-                </button>
+    <!-- --- HEADER SECTION (SOLO LOGO Y SELECTOR DE IDIOMA) --- -->
+    <header class="shadow-md sticky top-0 bg-white z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- LOGO BDiR MARESME -->
+                <a href="#" class="block cursor-pointer p-1 rounded-md transition-colors">
+                    <div class="text-2xl font-bold tracking-tighter text-bdir-blue font-title">
+                        BDiR <span class="font-light text-gray-500 ml-1">Maresme</span>
+                    </div>
+                </a>
+                
+                <!-- SELECTOR DE IDIOMA -->
+                <div class="flex space-x-2 text-sm font-semibold text-gray-500 z-50 relative">
+                    <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn active">ES</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('ca')" id="btn-ca" class="lang-btn">CA</button>
+                </div>
             </div>
         </div>
+    </header>
 
-        <!-- Encabezado Principal -->
-        <header class="text-center mb-10 sm:mb-16">
-            <h1 id="mainTitle" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
-                EL MEJOR CENTRO DE FITNESS DEL MARESME
+    <!-- --- HERO / MAIN CTA SECTION (SIN BOTÓN DE WHATSAPP SUPERIOR) --- -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center">
+            <h1 class="text-5xl font-extrabold text-gray-900 sm:text-6xl md:text-7xl font-title leading-tight">
+                <span data-i18n="hero_title_1">El mejor centro de fitness</span>
+                <span class="block text-bdir-blue" data-i18n="hero_title_2">en Premià de Dalt.</span>
             </h1>
-            <p id="subTitle" class="mt-4 text-lg text-main-blue font-medium">
-                Tu centro de referencia para la salud integral y el deporte.
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="hero_subtitle">
+                Entrenamiento personal, fisioterapia, nutrición y cuotas flexibles. ¡Empieza a transformar tu vida hoy!
             </p>
-        </header>
-
-        <!-- Contenedor de los Recuadros de Enlace (Grid Responsive) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-
-            <!-- Recuadro 1: Entrenamiento Personal -->
-            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresmeEP/" 
-               class="flex flex-col items-center justify-center p-6 bg-main-blue hover-bg-main-dark text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 ring-main-blue">
-                <div class="mb-4">
-                    <i data-lucide="user-cog" class="w-12 h-12"></i>
-                </div>
-                <h2 id="card1Title" class="text-xl sm:text-2xl font-bold text-center">
-                    Entrenamiento Personal
-                </h2>
-                <p id="card1Desc" class="mt-2 text-sm text-blue-100 text-center">
-                    Programas a medida para alcanzar tus metas.
-                </p>
-            </a>
-
-            <!-- Recuadro 2: Nutrición -->
-            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/" 
-               class="flex flex-col items-center justify-center p-6 bg-green-500 hover:bg-green-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-green-300">
-                <div class="mb-4">
-                    <i data-lucide="apple" class="w-12 h-12"></i>
-                </div>
-                <h2 id="card2Title" class="text-xl sm:text-2xl font-bold text-center">
-                    Nutrición
-                </h2>
-                <p id="card2Desc" class="mt-2 text-sm text-green-100 text-center">
-                    Planes dietéticos personalizados y asesoramiento.
-                </p>
-            </a>
-
-            <!-- Recuadro 3: Fisioterapia -->
-            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/" 
-               class="flex flex-col items-center justify-center p-6 bg-orange-500 hover:bg-orange-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-orange-300">
-                <div class="mb-4">
-                    <i data-lucide="stethoscope" class="w-12 h-12"></i>
-                </div>
-                <h2 id="card3Title" class="text-xl sm:text-2xl font-bold text-center">
-                    Fisioterapia
-                </h2>
-                <p id="card3Desc" class="mt-2 text-sm text-orange-100 text-center">
-                    Recuperación de lesiones y prevención de problemas.
-                </p>
-            </a>
-
-            <!-- Recuadro 4: Promos Cuotas -->
-            <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/" 
-               class="flex flex-col items-center justify-center p-6 bg-red-500 hover:bg-red-700 text-white rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-red-300">
-                <div class="mb-4">
-                    <i data-lucide="tag" class="w-12 h-12"></i>
-                </div>
-                <h2 id="card4Title" class="text-xl sm:text-2xl font-bold text-center">
-                    Promos Cuotas
-                </h2>
-                <p id="card4Desc" class="mt-2 text-sm text-red-100 text-center">
-                    Descubre nuestras ofertas y tarifas especiales.
-                </p>
-            </a>
-
-        </section>
-
-        <!-- Pie de página (Opcional, para contexto) -->
-        <footer class="mt-12 text-center text-gray-500 text-sm">
-            <p id="footerText">Tu centro de referencia en el Maresme para la salud integral y el deporte.</p>
-        </footer>
-
+            <!-- SE HA ELIMINADO EL BOTÓN DE WHATSAPP AQUÍ -->
+        </div>
     </main>
     
-    <script>
-        // Inicializa los iconos de Lucide
-        lucide.createIcons();
+    <!-- --- SERVICES SECTION (Enlaces a Landing Pages) --- -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12 font-title" data-i18n="services_title">
+                Nuestros Servicios Clave
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Tarjeta 1: Entrenamiento Personal -->
+                <a id="service-link-1" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
+                            <i data-lucide="dumbbell" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_1_title">Entrenamiento Personal</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_1_desc">
+                            Programas 100% individualizados con fisioterapeutas y entrenadores titulados para resultados reales y seguros.
+                        </p>
+                    </div>
+                </a>
 
-        // ----------------------------------------------------
-        // LÓGICA DEL IDIOMA
-        // ----------------------------------------------------
-        const content = {
-            'es': {
-                pageTitle: 'El Mejor Centro de Fitness del Maresme',
-                mainTitle: 'EL MEJOR CENTRO DE FITNESS DEL MARESME',
-                subTitle: 'Tu centro de referencia para la salud integral y el deporte.',
-                card1Title: 'Entrenamiento Personal',
-                card1Desc: 'Programas a medida para alcanzar tus metas.',
-                card2Title: 'Nutrición',
-                card2Desc: 'Planes dietéticos personalizados y asesoramiento.',
-                card3Title: 'Fisioterapia',
-                card3Desc: 'Recuperación de lesiones y prevención de problemas.',
-                card4Title: 'Promos Cuotas',
-                card4Desc: 'Descubre nuestras ofertas y tarifas especiales.',
-                footerText: 'Tu centro de referencia en el Maresme para la salud integral y el deporte.'
+                <!-- Tarjeta 2: Nutrición -->
+                <a id="service-link-2" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
+                            <i data-lucide="apple" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_2_title">Asesoramiento Nutricional</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_2_desc">
+                            Planificación dietética para optimizar tu rendimiento, pérdida de peso o ganancia muscular. Enfocado en tus objetivos.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Tarjeta 3: Fisioterapia -->
+                <a id="service-link-3" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
+                            <i data-lucide="hand-heart" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_3_title">Fisioterapia Avanzada</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_3_desc">
+                            Prevención y tratamiento de lesiones. Recupera tu movilidad y entrena sin dolor con nuestros especialistas.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Tarjeta 4: Promos Cuotas -->
+                <a id="service-link-4" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
+                            <i data-lucide="badge-check" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_4_title">Promociones en Cuotas</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_4_desc">
+                            Consulta nuestras cuotas flexibles, adaptadas a tu horario y presupuesto. Entrena cuando y como quieras.
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- --- CALL TO ACTION SECTION (Promociones - Aún usa WhatsApp) --- -->
+    <section id="promociones" class="py-20 bg-bdir-blue text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold sm:text-4xl mb-6 font-title" data-i18n="promo_cta_title">
+                ¡Empieza con nuestra Oferta de Bienvenida!
+            </h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto" data-i18n="promo_cta_desc">
+                Accede a una semana gratuita o a un descuento especial en tu primera cuota anual.
+            </p>
+            <!-- Este CTA sigue usando WhatsApp para contacto general/ofertas -->
+            <a id="promo-cta-link" href="#" target="_blank" class="inline-block bg-white py-4 px-10 border border-transparent rounded-full shadow-lg text-lg font-bold text-bdir-blue hover:bg-gray-50 transition-all transform hover:-translate-y-1 uppercase font-title">
+                <span data-i18n="promo_cta_btn">SOLICITAR INFORMACIÓN</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- --- FOOTER (ESTILO OSCURO: bg-gray-900) --- -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <!-- LOGO FOOTER (BDiR MARESME) - TEXTO BLANCO -->
+                    <a href="#" class="block cursor-pointer p-1 rounded-md hover:bg-gray-800 transition-colors">
+                        <div class="text-xl font-bold tracking-tighter text-bdir-blue font-title">
+                            BDiR <span class="font-light text-gray-300 ml-1 text-lg">Maresme</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-gray-300 text-sm">
+                     <!-- ENLACE DE DIRECCIÓN A GOOGLE MAPS -->
+                    <a href="https://www.google.com/maps/place/BDiR+Maresme/@41.5017127,2.3585388,17z/data=!3m2!4b1!5s0x12a4b6ca06a87c4f:0x3f1604cbb1de26a0!4m6!3m5!1s0x12a4b6c9f5bdc26f:0x30d3bea632480e1!8m2!3d41.5017127!4d2.3611137!16s%2Fg%2F11hctz10q0?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group cursor-pointer" aria-label="Abrir Google Maps con la dirección del gimnasio">
+                        <i data-lucide="map-pin" class="h-5 w-5 text-bdir-blue"></i>
+                        <span>Av. Pedrablanca S/N Local 7, Premià de Dalt</span>
+                    </a>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
+                        <span>93 754 87 47</span>
+                    </div>
+                    <!-- Enlace WhatsApp - General -->
+                    <a id="whatsapp-link-footer" href="#" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
+                        <i data-lucide="message-circle" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
+                        <span class="font-semibold">682 334 580</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+                <!-- Redes Sociales (Facebook e Instagram) - ICONOS BLANCOS/GRISES -->
+                <div class="flex space-x-6 md:order-3 mt-4 md:mt-0 justify-center md:justify-end">
+                    <a href="https://www.facebook.com/bdirmaresme/?locale=es_ES" target="_blank" class="text-gray-500 hover:text-bdir-blue transition-colors">
+                        <span class="sr-only">Facebook</span>
+                        <i data-lucide="facebook" class="h-6 w-6"></i>
+                    </a>
+                    <a href="https://www.instagram.com/bdirmaresme/?hl=es" target="_blank" class="text-gray-500 hover:text-bdir-blue transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <i data-lucide="instagram" class="h-6 w-6"></i>
+                    </a>
+                </div>
+
+                <!-- Enlaces Legales - TEXTO GRIS CLARO -->
+                <div class="flex space-x-6 md:order-2 justify-center mt-4 md:mt-0 text-sm">
+                    <a href="#" onclick="openLegalModal('privacy', event)" class="text-gray-400 hover:text-white transition-colors" data-i18n="footer_privacy">Política de Privacidad</a>
+                    <a href="#" onclick="openLegalModal('cookies', event)" class="text-gray-400 hover:text-white transition-colors" data-i18n="footer_cookies">Política de Cookies</a>
+                    <a href="#" onclick="openLegalModal('legal', event)" class="text-gray-400 hover:text-white transition-colors" data-i18n="footer_legal">Aviso Legal</a>
+                </div>
+
+                <!-- Copyright - TEXTO GRIS OSCURO -->
+                <p class="mt-8 text-base text-gray-500 md:mt-0 md:order-1 text-center md:text-left" data-i18n="footer_rights">
+                    &copy; 2025 BDiR Maresme. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- --- MODAL DE AVISOS LEGALES --- -->
+    <div id="legal-modal" class="fixed inset-0 hidden modal-overlay flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto transform transition-all">
+            <div class="p-6">
+                <!-- Header del Modal -->
+                <div class="flex justify-between items-center border-b pb-3 mb-4 sticky top-0 bg-white z-10">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900 font-title"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                
+                <!-- Contenido del Modal -->
+                <div id="modal-content" class="text-gray-700 leading-relaxed text-sm">
+                    
+                    <!-- Contenido Aviso Legal -->
+                    <div id="legal-content" class="hidden">
+                        <h4 class="text-xl font-bold mb-3 mt-4 text-bdir-blue" data-i18n="legal_title">Aviso Legal de BDiR Maresme</h4>
+                        
+                        <h5 class="font-bold mt-4 text-lg" data-i18n="legal_section_1_title">1. Datos Identificativos del Titular</h5>
+                        <p class="text-sm italic text-gray-500" data-i18n="legal_section_1_intro">En cumplimiento con el deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se informa de:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2 text-sm mt-2">
+                            <li data-i18n="legal_id_owner">Titular del Sitio Web: **[Nombre de la Empresa o Persona Física]**</li>
+                            <li data-i18n="legal_id_nif">NIF/CIF: **[Tu NIF/CIF]**</li>
+                            <li data-i18n="legal_id_address">Domicilio Social: **[Tu dirección completa]**</li>
+                            <li data-i18n="legal_id_email">Correo Electrónico: **[Tu Email de Contacto]**</li>
+                            <li data-i18n="legal_id_activity">Actividad: **Gestión de centros deportivos y fitness**</li>
+                        </ul>
+
+                        <h5 class="font-bold mt-6 text-lg" data-i18n="legal_section_2_title">2. Propiedad Intelectual e Industrial</h5>
+                        <p class="mb-4 text-sm" data-i18n="legal_section_2_content">BDiR Maresme, por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual e industrial del sitio web.</p>
+
+                        <h5 class="font-bold mt-6 text-lg" data-i18n="legal_section_3_title">3. Exclusión de Garantías y Responsabilidad</h5>
+                        <p class="mb-4 text-sm" data-i18n="legal_section_3_content">BDiR Maresme no se hace responsable de los daños y perjuicios que pudieran ocasionar, a título enunciativo: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos en los contenidos.</p>
+                    </div>
+
+                    <!-- Contenido Política de Privacidad -->
+                    <div id="privacy-content" class="hidden">
+                        <h4 class="text-xl font-bold mb-3 mt-4 text-bdir-blue" data-i18n="privacy_title">Política de Privacidad de BDiR Maresme</h4>
+                        
+                        <h5 class="font-bold mt-4 text-lg" data-i18n="privacy_section_1_title">1. Responsable del Tratamiento</h5>
+                        <p class="mb-4 text-sm" data-i18n="privacy_section_1_content">La entidad responsable del tratamiento de sus datos es **[Nombre de la Empresa o Persona Física, ejemplo: BDiR Maresme S.L.]**, con NIF/CIF **[Tu NIF/CIF]** y domicilio en **[Tu dirección completa]**. Para cualquier consulta, puede contactarnos en el correo electrónico: **[Tu Email de Contacto Legal, ejemplo: legal@bdirmaresme.com]**.</p>
+                        
+                        <h5 class="font-bold mt-6 text-lg" data-i18n="privacy_section_2_title">2. Datos Recabados y Finalidad</h5>
+                        <p class="mb-4 text-sm" data-i18n="privacy_section_2_content">Los datos recabados a través de formularios (si existieran) o contacto directo (nombre, email, teléfono) tienen como finalidad exclusiva la **gestión de la solicitud de información o contacto comercial** iniciada por el usuario.</p>
+
+                        <h5 class="font-bold mt-6 text-lg" data-i18n="privacy_section_3_title">3. Base Legal para el Tratamiento</h5>
+                        <p class="mb-4 text-sm" data-i18n="privacy_section_3_content">La base legal para el tratamiento es el **consentimiento** del interesado al contactarnos (Art. 6.1.a del RGPD).</p>
+                        
+                        <h5 class="font-bold mt-6 text-lg" data-i18n="privacy_section_4_title">4. Derechos del Usuario</h5>
+                        <p class="mb-4 text-sm" data-i18n="privacy_section_4_content">Usted tiene derecho a ejercer sus derechos de Acceso, Rectificación, Supresión, Oposición, Limitación del Tratamiento y Portabilidad. Puede ejercer estos derechos enviando un correo a **[Tu Email de Contacto Legal]** adjuntando copia de su DNI.</p>
+                    </div>
+
+                    <!-- Contenido Política de Cookies -->
+                    <div id="cookies-content" class="hidden">
+                        <h4 class="text-xl font-bold mb-3 mt-4 text-bdir-blue" data-i18n="cookies_title">Política de Cookies de BDiR Maresme</h4>
+                        <p class="mb-4" data-i18n="cookies_intro">El sitio web utiliza cookies para mejorar la experiencia del usuario.</p>
+                        
+                        <h5 class="font-bold mt-4" data-i18n="cookies_section_1_title">1. ¿Qué son las Cookies?</h5>
+                        <p class="mb-4" data-i18n="cookies_section_1_content">Una cookie es un pequeño fichero de texto que se descarga en el equipo del usuario al acceder a determinadas páginas web. Permiten almacenar y recuperar información sobre los hábitos de navegación de un usuario.</p>
+                        
+                        <h5 class="font-bold mt-4" data-i18n="cookies_section_2_title">2. Cookies Utilizadas</h5>
+                        <p class="mb-2" data-i18n="cookies_section_2_content_intro">Este sitio web utiliza o podría utilizar:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2">
+                            <li data-i18n="cookies_type_tech">**Cookies técnicas:** Necesarias para el correcto funcionamiento de la web.</li>
+                            <li data-i18n="cookies_type_anal">**Cookies de análisis:** Permiten cuantificar el número de usuarios y medir la actividad de la web.</li>
+                        </ul>
+                        
+                        <h5 class="font-bold mt-4" data-i18n="cookies_section_3_title">3. Consentimiento y Desactivación</h5>
+                        <p data-i18n="cookies_section_3_content">Al navegar, usted acepta el uso de las cookies en las condiciones contenidas en esta Política. Puede revocar el consentimiento y modificar la configuración de las cookies en cualquier momento a través de la configuración de su navegador.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: LOGICA + TRADUCCIONES -->
+    <script>
+        // Número de WhatsApp del centro de fitness
+        const WHATSAPP_NUMBER = '34682334580'; 
+        
+        // URLs de las landing pages específicas (NO son de WhatsApp)
+        const LANDING_URLS = {
+            service_1: "https://cmbdirmaresme-bot.github.io/landing-bdir-maresmeEP/",
+            service_2: "https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/",
+            service_3: "https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/",
+            service_4: "https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/",
+        };
+
+        // Diccionario de Traducciones
+        const translations = {
+            es: {
+                // Texts for the main page
+                hero_title_1: "El mejor centro de fitness",
+                hero_title_2: "en Premià de Dalt.",
+                hero_subtitle: "Entrenamiento personal, fisioterapia, nutrición y cuotas flexibles. ¡Empieza a transformar tu vida hoy!",
+                // main_cta: "CONTACTAR POR WHATSAPP", // Ya no se usa
+                services_title: "Nuestros Servicios Clave",
+                service_1_title: "Entrenamiento Personal",
+                service_1_desc: "Programas 100% individualizados con fisioterapeutas y entrenadores titulados para resultados reales y seguros.",
+                service_2_title: "Asesoramiento Nutricional",
+                service_2_desc: "Planificación dietética para optimizar tu rendimiento, pérdida de peso o ganancia muscular. Enfocado en tus objetivos.",
+                service_3_title: "Fisioterapia Avanzada",
+                service_3_desc: "Prevención y tratamiento de lesiones. Recupera tu movilidad y entrena sin dolor con nuestros especialistas.",
+                service_4_title: "Promociones en Cuotas",
+                service_4_desc: "Consulta nuestras cuotas flexibles, adaptadas a tu horario y presupuesto. Entrena cuando y como quieras.",
+                promo_cta_title: "¡Empieza con nuestra Oferta de Bienvenida!",
+                promo_cta_desc: "Accede a una semana gratuita o a un descuento especial en tu primera cuota anual.",
+                promo_cta_btn: "SOLICITAR INFORMACIÓN",
+
+                // WhatsApp Messages (Specific to the link)
+                whatsapp_message_general: "Hola, me gustaría saber más sobre BDiR Maresme y sus servicios generales.",
+                whatsapp_message_service_4: "Hola, me gustaría consultar las Promociones en Cuotas flexibles de BDiR Maresme. ¿Cuáles son las ofertas actuales?",
+
+                // Footer & Modal Texts
+                footer_privacy: "Política de Privacidad",
+                footer_cookies: "Política de Cookies",
+                footer_legal: "Aviso Legal",
+                footer_rights: "&copy; 2025 BDiR Maresme. Todos los derechos reservados.",
+                
+                // [AVISO LEGAL, PRIVACIDAD, COOKIES CONTENT - TEXTOS LARGOS]
+                legal_title: "Aviso Legal de BDiR Maresme",
+                legal_section_1_title: "1. Datos Identificativos del Titular",
+                legal_section_1_intro: "En cumplimiento con el deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se informa de:",
+                legal_id_owner: "Titular del Sitio Web: **[Nombre de la Empresa o Persona Física]**",
+                legal_id_nif: "NIF/CIF: **[Tu NIF/CIF]**",
+                legal_id_address: "Domicilio Social: **[Tu dirección completa]**",
+                legal_id_email: "Correo Electrónico: **[Tu Email de Contacto]**",
+                legal_id_activity: "Actividad: **Gestión de centros deportivos y fitness**",
+                legal_section_2_title: "2. Propiedad Intelectual e Industrial",
+                legal_section_2_content: "BDiR Maresme, por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual e industrial del sitio web.",
+                legal_section_3_title: "3. Exclusión de Garantías y Responsabilidad",
+                legal_section_3_content: "BDiR Maresme no se hace responsable de los daños y perjuicios que pudieran ocasionar, a título enunciativo: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos en los contenidos.",
+
+                privacy_title: "Política de Privacidad de BDiR Maresme",
+                privacy_section_1_title: "1. Responsable del Tratamiento",
+                privacy_section_1_content: "La entidad responsable del tratamiento de sus datos es **[Nombre de la Empresa o Persona Física, ejemplo: BDiR Maresme S.L.]**, con NIF/CIF **[Tu NIF/CIF]** y domicilio en **[Tu dirección completa]**. Para cualquier consulta, puede contactarnos en el correo electrónico: **[Tu Email de Contacto Legal, ejemplo: legal@bdirmaresme.com]**.",
+                privacy_section_2_title: "2. Datos Recabados y Finalidad",
+                privacy_section_2_content: "Los datos recabados a través de formularios (si existieran) o contacto directo (nombre, email, teléfono) tienen como finalidad exclusiva la **gestión de la solicitud de información o contacto comercial** iniciada por el usuario.",
+                privacy_section_3_title: "3. Base Legal para el Tratamiento",
+                privacy_section_3_content: "La base legal para el tratamiento es el **consentimiento** del interesado al contactarnos (Art. 6.1.a del RGPD).",
+                privacy_section_4_title: "4. Derechos del Usuario",
+                privacy_section_4_content: "Usted tiene derecho a ejercer sus derechos de Acceso, Rectificación, Supresión, Oposición, Limitación del Tratamiento y Portabilidad. Puede ejercer estos derechos enviando un correo a **[Tu Email de Contacto Legal]** adjuntando copia de su DNI.",
+                
+                cookies_title: "Política de Cookies de BDiR Maresme",
+                cookies_intro: "El sitio web utiliza cookies para mejorar la experiencia del usuario.",
+                cookies_section_1_title: "1. ¿Qué son las Cookies?",
+                cookies_section_1_content: "Una cookie es un pequeño fichero de texto que se descarga en el equipo del usuario al acceder a determinadas páginas web. Permiten almacenar y recuperar información sobre los hábitos de navegación de un usuario.",
+                cookies_section_2_title: "2. Cookies Utilizadas",
+                cookies_section_2_content_intro: "Este sitio web utiliza o podría utilizar:",
+                cookies_type_tech: "**Cookies técnicas:** Necesarias para el correcto funcionamiento de la web.",
+                cookies_type_anal: "**Cookies de análisis:** Permiten cuantificar el número de usuarios y medir la actividad de la web.",
+                cookies_section_3_title: "3. Consentimiento y Desactivación",
+                cookies_section_3_content: "Al navegar, usted acepta el uso de las cookies en las condiciones contenidas en esta Política. Puede revocar el consentimiento y modificar la configuración de las cookies en cualquier momento a través de la configuración de su navegador.",
             },
-            'ca': {
-                pageTitle: 'El Millor Centre de Fitness del Maresme',
-                mainTitle: 'EL MILLOR CENTRE DE FITNESS DEL MARESME',
-                subTitle: "El teu centre de referència per a la salut integral i l'esport.",
-                card1Title: 'Entrenament Personal',
-                card1Desc: 'Programes a mida per assolir els teus objectius.',
-                card2Title: 'Nutrició',
-                card2Desc: 'Plans dietètics personalitzats i assessorament.',
-                card3Title: 'Fisioteràpia',
-                card3Desc: 'Recuperació de lesions i prevenció de problemes.',
-                card4Title: 'Promos Quotes',
-                card4Desc: 'Descobreix les nostres ofertes i tarifes especials.',
-                footerText: "El teu centre de referència al Maresme per a la salut integral i l'esport."
+            ca: {
+                // Texts for the main page (Catalan)
+                hero_title_1: "El millor centre de fitness",
+                hero_title_2: "a Premià de Dalt.",
+                hero_subtitle: "Entrenament personal, fisioteràpia, nutrició i quotes flexibles. Comença a transformar la teva vida avui!",
+                // main_cta: "CONTACTAR PER WHATSAPP", // Ya no se usa
+                services_title: "Els nostres Serveis Clau",
+                service_1_title: "Entrenament Personal",
+                service_1_desc: "Programes 100% individualitzats amb fisioterapeutes i entrenadors titulats per a resultats reals i segurs.",
+                service_2_title: "Assessorament Nutricional",
+                service_2_desc: "Planificació dietètica per optimitzar el teu rendiment, pèrdua de pes o guany muscular. Enfocat als teus objectius.",
+                service_3_title: "Fisioteràpia Avançada",
+                service_3_desc: "Prevenció i tractament de lesions. Recupera la teva mobilitat i entrena sense dolor amb els nostres especialistes.",
+                service_4_title: "Promocions en Quotes",
+                service_4_desc: "Consulta les nostres quotes flexibles, adaptades al teu horari i pressupost. Entrena quan i com vulguis.",
+                promo_cta_title: "Comença amb la nostra Oferta de Benvinguda!",
+                promo_cta_desc: "Accedeix a una setmana gratuïta o a un descompte especial en la teva primera quota anual.",
+                promo_cta_btn: "SOL·LICITAR INFORMACIÓ",
+
+                // WhatsApp Messages (Specific to the link)
+                whatsapp_message_general: "Hola, m'agradaria saber més sobre BDiR Maresme i els seus serveis generals.",
+                whatsapp_message_service_4: "Hola, m'agradaria consultar les Promocions en Quotes flexibles de BDiR Maresme. Quines són les ofertes actuals?",
+
+
+                // Footer & Modal Texts (Catalan)
+                footer_privacy: "Política de Privacitat",
+                footer_cookies: "Política de Galetes",
+                footer_legal: "Avís Legal",
+                footer_rights: "&copy; 2025 BDiR Maresme. Tots els drets reservats.",
+
+                // [AVISO LEGAL, PRIVACIDAD, COOKIES CONTENT - TEXTOS LARGOS EN CATALÁN]
+                legal_title: "Avís Legal de BDiR Maresme",
+                legal_section_1_title: "1. Dades Identificatives del Titular",
+                legal_section_1_intro: "En compliment amb el deure d'informació recollit a l'article 10 de la Llei 34/2002, d'11 de juliol, de Serveis de la Societat de la Informació i del Comerç Electrònic (LSSI-CE), s'informa de:",
+                legal_id_owner: "Titular del Lloc Web: **[Nom de l'Empresa o Persona Física]**",
+                legal_id_nif: "NIF/CIF: **[El teu NIF/CIF]**",
+                legal_id_address: "Domicili Social: **[La teva adreça completa]**",
+                legal_id_email: "Correu Electrònic: **[El teu Correu Electrònic de Contacte]**",
+                legal_id_activity: "Activitat: **Gestió de centres esportius i fitness**",
+                legal_section_2_title: "2. Propietat Intel·lectual i Industrial",
+                legal_section_2_content: "BDiR Maresme, per si o com a cessionària, és titular de tots els drets de propietat intel·lectual i industrial del lloc web.",
+                legal_section_3_title: "3. Exclusió de Garanties i Responsabilitat",
+                legal_section_3_content: "BDiR Maresme no es fa responsable dels danys i perjudicis que puguin ocasionar, a títol enunciatiu: errors o omissions en els continguts, manca de disponibilitat del portal o la transmissió de virus o programes maliciosos en els continguts.",
+
+                privacy_title: "Política de Privacitat de BDiR Maresme",
+                privacy_section_1_title: "1. Responsable del Tractament",
+                privacy_section_1_content: "L'entitat responsable del tractament de les seves dades és **[Nom de l'Empresa o Persona Física, exemple: BDiR Maresme S.L.]**, amb NIF/CIF **[El teu NIF/CIF]** i domicili a **[La teva adreça completa]**. Per a qualsevol consulta, pot contactar-nos al correu electrònic: **[El teu Correu Electrònic de Contacte Legal, exemple: legal@bdirmaresme.com]**.",
+                privacy_section_2_title: "2. Dades Recollides i Finalitat",
+                privacy_section_2_content: "Les dades recollides a través de formularis (si existissin) o contacte directe (nom, email, telèfon) tenen com a finalitat exclusiva la **gestió de la sol·licitud d'informació o contacte comercial** iniciada per l'usuari.",
+                privacy_section_3_title: "3. Base Legal per al Tractament",
+                privacy_section_3_content: "La base legal per al tractament és el **consentiment** de l'interessat en contactar-nos (Art. 6.1.a del RGPD).",
+                privacy_section_4_title: "4. Drets de l'Usuari",
+                privacy_section_4_content: "Vostè té dret a exercir els seus drets d'Accés, Rectificació, Supressió, Oposició, Limitació del Tractament i Portabilitat. Pot exercir aquests drets enviant un correu a **[El teu Correu Electrònic de Contacte Legal]** adjuntant còpia del seu DNI.",
+                
+                cookies_title: "Política de Galetes de BDiR Maresme",
+                cookies_intro: "El lloc web utilitza galetes per millorar l'experiència de l'usuari.",
+                cookies_section_1_title: "1. Què són les Galetes (Cookies)?",
+                cookies_section_1_content: "Una galeta és un petit fitxer de text que es descarrega a l'equip de l'usuari en accedir a determinades pàgines web. Permeten emmagatzemar i recuperar informació sobre els hàbits de navegació d'un usuari.",
+                cookies_section_2_title: "2. Galetes Utilitzades",
+                cookies_section_2_content_intro: "Aquest lloc web utilitza o podria utilitzar:",
+                cookies_type_tech: "**Galetes tècniques:** Necessàries per al correcte funcionament del web.",
+                cookies_type_anal: "**Galetes d'anàlisi:** Permeten quantificar el nombre d'usuaris i mesurar l'activitat del web.",
+                cookies_section_3_title: "3. Consentiment i Desactivació",
+                cookies_section_3_content: "En navegar, vostè accepta l'ús de les galetes en les condicions contingudes en aquesta Política. Pot revocar el consentiment i modificar la configuració de les galetes en qualsevol moment a través de la configuració del seu navegador.",
             }
         };
 
-        function updateButtonStyles(lang) {
-            const esButton = document.getElementById('lang-es');
-            const caButton = document.getElementById('lang-ca');
+        // Función para construir el enlace de WhatsApp
+        function createWhatsappLink(messageKey, lang) {
+            const message = translations[lang][messageKey] || translations['es'][messageKey];
+            const encodedMessage = encodeURIComponent(message);
+            return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+        }
+
+
+        // Función para cambiar el idioma y actualizar todos los enlaces
+        function changeLanguage(lang) {
+            // A. Actualizar todos los textos con data-i18n
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key]; 
+                }
+            });
+
+            // B. Actualizar los enlaces
+            const generalMessageKey = 'whatsapp_message_general';
+            const promoMessageKey = 'whatsapp_message_service_4'; 
+
+            // 1. CTA Principal (Hero) - ELIMINADO
+
+            // 2. Tarjetas de Servicio (SON ENLACES EXTERNOS A LANDING PAGES)
+            document.getElementById('service-link-1').href = LANDING_URLS.service_1; // Entrenamiento Personal
+            document.getElementById('service-link-2').href = LANDING_URLS.service_2; // Nutrición
+            document.getElementById('service-link-3').href = LANDING_URLS.service_3; // Fisioterapia
+            document.getElementById('service-link-4').href = LANDING_URLS.service_4; // Promos Cuotas
+
+            // 3. CTA Promociones (Sección Azul) USA WHATSAPP
+            document.getElementById('promo-cta-link').href = createWhatsappLink(promoMessageKey, lang);
             
-            if (lang === 'es') {
-                esButton.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
-                esButton.classList.add('bg-main-blue', 'text-white', 'hover-bg-main-dark');
-                caButton.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
-                caButton.classList.remove('bg-main-blue', 'text-white', 'hover-bg-main-dark');
-            } else if (lang === 'ca') {
-                caButton.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
-                caButton.classList.add('bg-main-blue', 'text-white', 'hover-bg-main-dark');
-                esButton.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
-                esButton.classList.remove('bg-main-blue', 'text-white', 'hover-bg-main-dark');
+            // 4. Enlace General del Footer USA WHATSAPP
+            document.getElementById('whatsapp-link-footer').href = createWhatsappLink(generalMessageKey, lang);
+            
+            // C. Actualizar botones activos y lang
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-ca').classList.toggle('active', lang === 'ca');
+            document.documentElement.lang = lang;
+        }
+
+        // Funciones para el Modal de Avisos Legales
+        function openLegalModal(type, event) {
+            if (event) event.preventDefault(); 
+            
+            const modal = document.getElementById('legal-modal');
+            const title = document.getElementById('modal-title');
+            
+            // Ocultar todos los contenidos y restablecer el título
+            document.getElementById('legal-content').classList.add('hidden');
+            document.getElementById('privacy-content').classList.add('hidden');
+            document.getElementById('cookies-content').classList.add('hidden');
+            title.textContent = '';
+            
+            // Mostrar el contenido correcto y establecer el título
+            const lang = document.documentElement.lang;
+            
+            switch (type) {
+                case 'legal':
+                    document.getElementById('legal-content').classList.remove('hidden');
+                    title.textContent = translations[lang]['footer_legal'];
+                    break;
+                case 'privacy':
+                    document.getElementById('privacy-content').classList.remove('hidden');
+                    title.textContent = translations[lang]['footer_privacy'];
+                    break;
+                case 'cookies':
+                    document.getElementById('cookies-content').classList.remove('hidden');
+                    title.textContent = translations[lang]['footer_cookies'];
+                    break;
             }
+
+            // Mostrar el modal
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); // Evita el scroll del cuerpo
+            
+            // Re-aplicar traducciones al modal y recrear iconos
+            changeLanguage(lang); 
+            lucide.createIcons();
         }
 
-        function setLanguage(lang) {
-            const data = content[lang];
-            
-            document.getElementById('pageTitle').textContent = data.pageTitle;
-            document.getElementById('mainTitle').textContent = data.mainTitle;
-            document.getElementById('subTitle').textContent = data.subTitle;
-            document.getElementById('card1Title').textContent = data.card1Title;
-            document.getElementById('card1Desc').textContent = data.card1Desc;
-            document.getElementById('card2Title').textContent = data.card2Title;
-            document.getElementById('card2Desc').textContent = data.card2Desc;
-            document.getElementById('card3Title').textContent = data.card3Title;
-            document.getElementById('card3Desc').textContent = data.card3Desc;
-            document.getElementById('card4Title').textContent = data.card4Title;
-            document.getElementById('card4Desc').textContent = data.card4Desc;
-            document.getElementById('footerText').textContent = data.footerText;
-            
-            updateButtonStyles(lang);
-            // Guarda el idioma seleccionado para futuras cargas
-            localStorage.setItem('selectedLang', lang);
+        function closeModal() {
+            document.getElementById('legal-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
         }
+        
+        // Cierre del modal con la tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('legal-modal').classList.contains('hidden')) {
+                closeModal();
+            }
+        });
 
-        // Carga el idioma al iniciar (por defecto, Castellano)
-        const initialLang = localStorage.getItem('selectedLang') || 'es';
-        setLanguage(initialLang);
+
+        // Inicialización: Aplicar idioma por defecto al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aseguramos que la función de iconos se ejecute antes de cambiar el idioma
+            lucide.createIcons();
+            // Esto también llama a changeLanguage('es') y actualiza todos los CTAs
+            changeLanguage('es'); 
+        });
     </script>
 </body>
 </html>
