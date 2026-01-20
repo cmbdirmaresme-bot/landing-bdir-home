@@ -147,6 +147,19 @@
                     </div>
                 </a>
 
+                <!-- Tarjeta 5: Senior -->
+                <a id="service-link-5" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
+                            <i data-lucide="users" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_5_title">Senior</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_5_desc">
+                            Programas adaptados para personas mayores, enfocados en movilidad, equilibrio y salud funcional.
+                        </p>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
@@ -311,6 +324,7 @@
             service_2: "https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/",
             service_3: "https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/",
             service_4: "https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/",
+            service_5: "https://cmbdirmaresme-bot.github.io/seniors/"
         };
 
         // Diccionario de Traducciones
@@ -330,6 +344,8 @@
                 service_3_desc: "Prevención y tratamiento de lesiones. Recupera tu movilidad y entrena sin dolor con nuestros especialistas.",
                 service_4_title: "Promociones en Cuotas",
                 service_4_desc: "Consulta nuestras cuotas flexibles, adaptadas a tu horario y presupuesto. Entrena cuando y como quieras.",
+                service_5_title: "Senior",
+                service_5_desc: "Programas adaptados para personas mayores, enfocados en movilidad, equilibrio y salud funcional.",
                 promo_cta_title: "¡Empieza con nuestra Oferta de Bienvenida!",
                 promo_cta_desc: "Accede a una semana gratuita o a un descuento especial en tu primera cuota anual.",
                 promo_cta_btn: "SOLICITAR INFORMACIÓN",
@@ -394,6 +410,8 @@
                 service_3_desc: "Prevenció i tractament de lesions. Recupera la teva mobilitat i entrena sense dolor amb els nostres especialistes.",
                 service_4_title: "Promocions en Quotes",
                 service_4_desc: "Consulta les nostres quotes flexibles, adaptades al teu horari i pressupost. Entrena quan i com vulguis.",
+                service_5_title: "Senior",
+                service_5_desc: "Programes adaptats per a persones majors, centrats en mobilitat, equilibri i salut funcional.",
                 promo_cta_title: "Comença amb la nostra Oferta de Benvinguda!",
                 promo_cta_desc: "Accedeix a una setmana gratuïta o a un descompte especial en la teva primera quota anual.",
                 promo_cta_btn: "SOL·LICITAR INFORMACIÓ",
@@ -441,7 +459,6 @@
                 cookies_section_2_content_intro: "Aquest lloc web utilitza o podria utilitzar:",
                 cookies_type_tech: "**Galetes tècniques:** Necessàries per al correcte funcionament del web.",
                 cookies_type_anal: "**Galetes d'anàlisi:** Permeten quantificar el nombre d'usuaris i mesurar l'activitat del web.",
-                cookies_section_3_title: "3. Consentiment i Desactivació",
                 cookies_section_3_content: "En navegar, vostè accepta l'ús de les galetes en les condicions contingudes en aquesta Política. Pot revocar el consentiment i modificar la configuració de les galetes en qualsevol moment a través de la configuració del seu navegador.",
             }
         };
@@ -476,6 +493,7 @@
             document.getElementById('service-link-2').href = LANDING_URLS.service_2; // Nutrición
             document.getElementById('service-link-3').href = LANDING_URLS.service_3; // Fisioterapia
             document.getElementById('service-link-4').href = LANDING_URLS.service_4; // Promos Cuotas
+            document.getElementById('service-link-5').href = LANDING_URLS.service_5; // Senior
 
             // 3. CTA Promociones (Sección Azul) USA WHATSAPP
             document.getElementById('promo-cta-link').href = createWhatsappLink(promoMessageKey, lang);
