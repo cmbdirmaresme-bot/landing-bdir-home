@@ -47,27 +47,6 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: translateY(-4px);
         }
-
-        /* Estilo especial para ELITE 90 - Destaca del resto */
-        .service-card.elite-90 {
-            border-t-4 border-yellow-500;
-            background: linear-gradient(135deg, rgba(0, 159, 227, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%);
-        }
-        .service-card.elite-90:hover {
-            border-t-4 border-yellow-500;
-            box-shadow: 0 10px 25px -5px rgba(255, 193, 7, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .elite-90-badge {
-            display: inline-block;
-            background-color: #FFD700;
-            color: #333;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
     </style>
 </head>
 <body class="min-h-screen bg-white font-sans text-gray-800 antialiased">
@@ -181,11 +160,10 @@
                     </div>
                 </a>
 
-                <!-- Tarjeta 6: ELITE 90 (NUEVA) -->
-                <a id="service-link-6" href="#" target="_blank" class="service-card elite-90 bg-white rounded-xl shadow-md overflow-hidden">
+                <!-- Tarjeta 6: ELITE 90 (IDÉNTICA A LAS OTRAS) -->
+                <a id="service-link-6" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
                     <div class="p-6">
-                        <div class="elite-90-badge" data-i18n="service_6_badge">⭐ ELITE 90</div>
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-50 text-yellow-600 mb-4">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 text-bdir-blue mb-4">
                             <i data-lucide="zap" class="h-6 w-6"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_6_title">Programa ELITE 90</h3>
@@ -382,7 +360,6 @@
                 service_4_desc: "Consulta nuestras cuotas flexibles, adaptadas a tu horario y presupuesto. Entrena cuando y como quieras.",
                 service_5_title: "Senior",
                 service_5_desc: "Programas adaptados para personas mayores, enfocados en movilidad, equilibrio y salud funcional.",
-                service_6_badge: "⭐ ELITE 90",
                 service_6_title: "Programa ELITE 90",
                 service_6_desc: "90 días que te cambiarán la vida. Entrena y come como se debe. Transformación garantizada.",
                 promo_cta_title: "¡Empieza con nuestra Oferta de Bienvenida!",
@@ -451,7 +428,6 @@
                 service_4_desc: "Consulta les nostres quotes flexibles, adaptades al teu horari i pressupost. Entrena quan i com vulguis.",
                 service_5_title: "Senior",
                 service_5_desc: "Programes adaptats per a persones majors, centrats en mobilitat, equilibri i salut funcional.",
-                service_6_badge: "⭐ ELITE 90",
                 service_6_title: "Programa ELITE 90",
                 service_6_desc: "90 dies que et canviaran la vida. Entrena i menja com es degut. Transformació garantida.",
                 promo_cta_title: "Comença amb la nostra Oferta de Benvinguda!",
