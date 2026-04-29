@@ -47,6 +47,27 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: translateY(-4px);
         }
+
+        /* Estilo especial para ELITE 90 - Destaca del resto */
+        .service-card.elite-90 {
+            border-t-4 border-yellow-500;
+            background: linear-gradient(135deg, rgba(0, 159, 227, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%);
+        }
+        .service-card.elite-90:hover {
+            border-t-4 border-yellow-500;
+            box-shadow: 0 10px 25px -5px rgba(255, 193, 7, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .elite-90-badge {
+            display: inline-block;
+            background-color: #FFD700;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white font-sans text-gray-800 antialiased">
@@ -93,7 +114,7 @@
                 Nuestros Servicios Clave
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Tarjeta 1: Entrenamiento Personal -->
                 <a id="service-link-1" href="#" target="_blank" class="service-card bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-bdir-blue">
@@ -156,6 +177,20 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_5_title">Senior</h3>
                         <p class="text-gray-600 text-sm" data-i18n="service_5_desc">
                             Programas adaptados para personas mayores, enfocados en movilidad, equilibrio y salud funcional.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Tarjeta 6: ELITE 90 (NUEVA) -->
+                <a id="service-link-6" href="#" target="_blank" class="service-card elite-90 bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="elite-90-badge" data-i18n="service_6_badge">⭐ ELITE 90</div>
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-50 text-yellow-600 mb-4">
+                            <i data-lucide="zap" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 font-title" data-i18n="service_6_title">Programa ELITE 90</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="service_6_desc">
+                            90 días que te cambiarán la vida. Entrena y come como se debe. Transformación garantizada.
                         </p>
                     </div>
                 </a>
@@ -324,7 +359,8 @@
             service_2: "https://cmbdirmaresme-bot.github.io/landing-bdir-nutricion/",
             service_3: "https://cmbdirmaresme-bot.github.io/landing-bdir-fisioterapia/",
             service_4: "https://cmbdirmaresme-bot.github.io/landing-bdir-maresme-Promos-cuotas/",
-            service_5: "https://cmbdirmaresme-bot.github.io/seniors/"
+            service_5: "https://cmbdirmaresme-bot.github.io/seniors/",
+            service_6: "https://cmbdirmaresme-bot.github.io/landing-bdir-elite-90/"
         };
 
         // Diccionario de Traducciones
@@ -346,6 +382,9 @@
                 service_4_desc: "Consulta nuestras cuotas flexibles, adaptadas a tu horario y presupuesto. Entrena cuando y como quieras.",
                 service_5_title: "Senior",
                 service_5_desc: "Programas adaptados para personas mayores, enfocados en movilidad, equilibrio y salud funcional.",
+                service_6_badge: "⭐ ELITE 90",
+                service_6_title: "Programa ELITE 90",
+                service_6_desc: "90 días que te cambiarán la vida. Entrena y come como se debe. Transformación garantizada.",
                 promo_cta_title: "¡Empieza con nuestra Oferta de Bienvenida!",
                 promo_cta_desc: "Accede a una semana gratuita o a un descuento especial en tu primera cuota anual.",
                 promo_cta_btn: "SOLICITAR INFORMACIÓN",
@@ -412,6 +451,9 @@
                 service_4_desc: "Consulta les nostres quotes flexibles, adaptades al teu horari i pressupost. Entrena quan i com vulguis.",
                 service_5_title: "Senior",
                 service_5_desc: "Programes adaptats per a persones majors, centrats en mobilitat, equilibri i salut funcional.",
+                service_6_badge: "⭐ ELITE 90",
+                service_6_title: "Programa ELITE 90",
+                service_6_desc: "90 dies que et canviaran la vida. Entrena i menja com es degut. Transformació garantida.",
                 promo_cta_title: "Comença amb la nostra Oferta de Benvinguda!",
                 promo_cta_desc: "Accedeix a una setmana gratuïta o a un descompte especial en la teva primera quota anual.",
                 promo_cta_btn: "SOL·LICITAR INFORMACIÓ",
@@ -459,6 +501,7 @@
                 cookies_section_2_content_intro: "Aquest lloc web utilitza o podria utilitzar:",
                 cookies_type_tech: "**Galetes tècniques:** Necessàries per al correcte funcionament del web.",
                 cookies_type_anal: "**Galetes d'anàlisi:** Permeten quantificar el nombre d'usuaris i mesurar l'activitat del web.",
+                cookies_section_3_title: "3. Consentiment i Desactivació",
                 cookies_section_3_content: "En navegar, vostè accepta l'ús de les galetes en les condicions contingudes en aquesta Política. Pot revocar el consentiment i modificar la configuració de les galetes en qualsevol moment a través de la configuració del seu navegador.",
             }
         };
@@ -494,6 +537,7 @@
             document.getElementById('service-link-3').href = LANDING_URLS.service_3; // Fisioterapia
             document.getElementById('service-link-4').href = LANDING_URLS.service_4; // Promos Cuotas
             document.getElementById('service-link-5').href = LANDING_URLS.service_5; // Senior
+            document.getElementById('service-link-6').href = LANDING_URLS.service_6; // ELITE 90
 
             // 3. CTA Promociones (Sección Azul) USA WHATSAPP
             document.getElementById('promo-cta-link').href = createWhatsappLink(promoMessageKey, lang);
